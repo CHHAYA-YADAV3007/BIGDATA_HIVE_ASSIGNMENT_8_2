@@ -1,0 +1,67 @@
+package packageUDF;
+
+import java.util.*;
+
+import org.apache.hadoop.hive.ql.exec.UDF;
+
+public class MyUDF extends UDF {
+	
+	public String evaluate(String SEP, ArrayList<String> strArr) {
+		
+		String outputString = "" ;
+		
+		if(SEP == null){
+			
+			outputString = "First Argument: SEPARATOR is null" ;
+			
+			return outputString;
+		}
+		if(strArr.isEmpty()) {
+			
+            outputString = "Second Argument: STRING ARRAY is null" ;
+			
+			return outputString;
+		}
+		
+		
+		try{
+		
+		     Iterator itr = strArr.iterator();
+		
+		     int i = 1;
+		
+		     while(itr.hasNext()) {
+			
+		     	if(i < strArr.size()) {
+			
+			        outputString  = outputString  + itr.next() +SEP ;
+			     }
+			 
+			    if( i == strArr.size()){
+				
+				     outputString  = outputString + itr.next() ;
+			
+						 
+			      }
+				
+		    	i++;
+		      }
+		}
+		catch(Exception e){
+			
+			System.out.println(e);
+		}
+		
+		return outputString ;
+		
+	}
+	
+	
+	
+public String concat_ws(String SEP , String[] strArr) {
+		
+		return evaluate(SEP, new ArrayList<String>(Arrays.asList(strArr)));
+}
+
+
+}
