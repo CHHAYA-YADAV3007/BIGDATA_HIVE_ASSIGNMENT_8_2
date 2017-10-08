@@ -1,0 +1,39 @@
+package packageHive;
+
+import java.util.ArrayList;
+
+import org.apache.hadoop.hive.ql.exec.UDF;
+
+public class MyUDF extends UDF {
+	
+     public String evaluate(String sep, String[] strarray) {
+	
+          StringBuffer sBuffer;
+          
+          if (strarray == null) {
+	
+          return null;
+
+        }
+          
+        sBuffer = new StringBuffer().append(strarray[0]);
+        
+        for (int i=1; i < strarray.length; i++) {
+	
+          sBuffer.append(sep);
+
+          sBuffer.append(strarray[i]);
+        
+   
+        }
+        
+       
+        String output = sBuffer.toString();
+        
+        
+        return output;
+
+}
+}
+
+
